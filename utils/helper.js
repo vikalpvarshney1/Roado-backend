@@ -7,8 +7,7 @@ const strictMatch = "false";
 oxfordBaseUrl = 'https://od-api.oxforddictionaries.com/api/v2/'
 
 async function getWordDetail(word) {
-    
-    const options = {
+      const options = {
         method: 'GET',
         url: oxfordBaseUrl + 'entries/en-us/' + word + '?fields=' + fields + '&strictMatch=' + strictMatch,
         headers: {
@@ -16,19 +15,13 @@ async function getWordDetail(word) {
             'app_key': app_key
         }
     };
-
-    //empty object
     let wordObj = {}
-
-    //error handling
     try {
-        //response
         let {data} = await axios(options)
         console.log(data)
        
         wordObj.word = data.results[0].word
         wordObj.entries = [];
-        // entries
         data.results[0].lexicalEntries.forEach(lexicalEntry => {
             wordObj.entries.push({
                 partOfSpeech: lexicalEntry.lexicalCategory.text,
